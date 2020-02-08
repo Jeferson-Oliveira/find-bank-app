@@ -6,10 +6,23 @@ target 'Find Banks' do
   use_frameworks!
 
   # Pods for Find Banks
+  pod 'Alamofire', '~> 4.9.0'
+  
+  #RxSwift
+  pod 'RxSwift', '~> 5.0.0'
+  pod 'RxCocoa', '~> 5.0.0'
+  
+  #RxUtility
+  pod 'RxSwiftExt', '~> 5.2.0'
+  pod 'RxGoogleMaps'
 
   target 'Find BanksTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Mockingjay', '~> 3.0.0-alpha.1'
+    pod 'Quick', '~> 2.2.0'
+    pod 'Nimble', '~> 8.0.5'
+
   end
 
   target 'Find BanksUITests' do
