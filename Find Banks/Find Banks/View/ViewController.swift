@@ -43,6 +43,7 @@ class ViewController: UIViewController {
         let marker = GMSMarker(position: position)
         marker.appearAnimation = .pop
         marker.isFlat = true
+        marker.icon = #imageLiteral(resourceName: "ic_itau")
         marker.map = self.mapView
         markers.append(marker)
     }
@@ -56,9 +57,11 @@ class ViewController: UIViewController {
     }
     
     private func setupInputs() {
-        mapView.rx.myLocation.unwrap().bind(onNext: { [weak self] myLocation in
-            self?.changeCamera(toLocation: myLocation.coordinate)
-            self?.viewModel.inputs.findBanksAction.onNext(myLocation)
+        mapView.rx.idleAt.subscribe(onNext: { [weak self] cameraPosition in
+            self?.viewModel
+                    .inputs
+                    .findBanksAction.onNext(.init(latitude: cameraPosition.target.latitude,
+                                              longitude: cameraPosition.target.longitude))
         }).disposed(by: disposedBag)
     }
     
@@ -93,3 +96,4 @@ extension ViewController: CLLocationManagerDelegate {
     }
 
 }
+

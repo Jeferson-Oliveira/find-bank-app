@@ -18,9 +18,9 @@ class BankService: BaseService, BankServiceProtocol {
     func findNeablyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>> {
         
         var parameters = Parameters()
-        parameters["radius"] = 20000
+        parameters["radius"] = APPConfig.radius
         parameters["types"] = "bank"
-        parameters["name"] = "Itau"
+        parameters["name"] = APPConfig.bankName
         parameters["key"] =  APPConfig.gmsServicesKey
         parameters["location"] = "\(from.coordinate.latitude),\(from.coordinate.longitude)"
         
