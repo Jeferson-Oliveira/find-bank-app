@@ -23,6 +23,8 @@
 		41A9886823EE534F005FB93B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9886723EE534F005FB93B /* Result.swift */; };
 		41A9886A23EE53AE005FB93B /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9886923EE53AE005FB93B /* Bank.swift */; };
 		41A9886C23EE555D005FB93B /* BankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9886B23EE555D005FB93B /* BankService.swift */; };
+		41C0AFE323EE5ABD00308EB6 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0AFE223EE5ABD00308EB6 /* Endpoints.swift */; };
+		41C0AFE523EE5C9200308EB6 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0AFE423EE5C9200308EB6 /* AppConfig.swift */; };
 		63272E79E4B7A6A302319BC2 /* Pods_Find_Banks_Find_BanksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C509B3D853782410BC7507 /* Pods_Find_Banks_Find_BanksUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		41A9886723EE534F005FB93B /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		41A9886923EE53AE005FB93B /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		41A9886B23EE555D005FB93B /* BankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankService.swift; sourceTree = "<group>"; };
+		41C0AFE223EE5ABD00308EB6 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		41C0AFE423EE5C9200308EB6 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		4957C623356D60681EE82F61 /* Pods-Find Banks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks/Pods-Find Banks.debug.xcconfig"; sourceTree = "<group>"; };
 		53C3EEEF7D62474FA6B19127 /* Pods-Find Banks-Find BanksUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks-Find BanksUITests.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks-Find BanksUITests/Pods-Find Banks-Find BanksUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FA501E46C38BC0CB21134C6 /* Pods_Find_BanksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_BanksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +161,7 @@
 		4117E65B23EE357300C87CCA /* App */ = {
 			isa = PBXGroup;
 			children = (
+				41C0AFE423EE5C9200308EB6 /* AppConfig.swift */,
 				4117E62B23EE356600C87CCA /* AppDelegate.swift */,
 				4117E62D23EE356600C87CCA /* SceneDelegate.swift */,
 				4117E63423EE356B00C87CCA /* Assets.xcassets */,
@@ -197,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				41A9886723EE534F005FB93B /* Result.swift */,
+				41C0AFE223EE5ABD00308EB6 /* Endpoints.swift */,
 				41A9886523EE52CA005FB93B /* BaseService.swift */,
 				41A9886B23EE555D005FB93B /* BankService.swift */,
 			);
@@ -521,8 +527,10 @@
 			files = (
 				4117E63023EE356600C87CCA /* ViewController.swift in Sources */,
 				41A9886A23EE53AE005FB93B /* Bank.swift in Sources */,
+				41C0AFE523EE5C9200308EB6 /* AppConfig.swift in Sources */,
 				4117E62C23EE356600C87CCA /* AppDelegate.swift in Sources */,
 				41A9886623EE52CA005FB93B /* BaseService.swift in Sources */,
+				41C0AFE323EE5ABD00308EB6 /* Endpoints.swift in Sources */,
 				41A9886423EE4E71005FB93B /* Location.swift in Sources */,
 				41A9886823EE534F005FB93B /* Result.swift in Sources */,
 				41A9886C23EE555D005FB93B /* BankService.swift in Sources */,
@@ -740,7 +748,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E5AC1AF39FF9D2449320C9E /* Pods-Find BanksTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 296LD5L9TC;
@@ -763,7 +770,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F045A70A60C80B52A0FE176C /* Pods-Find BanksTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 296LD5L9TC;
@@ -786,7 +792,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53C3EEEF7D62474FA6B19127 /* Pods-Find Banks-Find BanksUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 296LD5L9TC;
 				INFOPLIST_FILE = "Find BanksUITests/Info.plist";
@@ -807,7 +812,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC77009FE26FE16065B2751E /* Pods-Find Banks-Find BanksUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 296LD5L9TC;
 				INFOPLIST_FILE = "Find BanksUITests/Info.plist";

@@ -22,6 +22,7 @@ protocol FindBanksViewModelInput {
 }
 
 protocol FindBanksViewModelOutput {
+    var neablyBanks: Driver<[Bank]> { get }
     var feedback: Driver<String> { get }
 }
 
@@ -32,18 +33,22 @@ class FindBanksViewModel: FindBanksViewModelProtocol, FindBanksViewModelInput {
     
     let findBanksAction = PublishSubject<CLLocation>()
     
-    private let findBanksResult: Observable<Result<[Bank]>>
+    private let findBanksResult: Observable<Result<BanksPage>>
     private let service: BankServiceProtocol
     
     init(service: BankServiceProtocol = BankService()) {
         self.service = service
-        findBanksResult = findBanksAction.flatMap { latestLocation in
+        findBanksResult = findBanksAction.flatMapLatest { latestLocation in
             return service.findNeablyBanks(latestLocation)
         }.share()
     }
 }
 
 extension FindBanksViewModel: FindBanksViewModelOutput {
+    var neablyBanks: Driver<[Bank]> {
+        return findBanksResult.map { $0.value }.unwrap().map { $0.results }.asDriver(onErrorJustReturn: [])
+    }
+    
     var feedback: Driver<String> {
         findBanksResult.map { $0.failure?.localizedDescription }.unwrap().asDriver(onErrorJustReturn: "")
     }

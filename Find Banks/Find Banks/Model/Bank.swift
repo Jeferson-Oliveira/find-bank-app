@@ -8,6 +8,28 @@
 
 import Foundation
 
-class Bank: Codable {
-    
+class BanksPage: Codable {
+    let results: [Bank]
 }
+
+class Bank: Codable {
+    var id: String
+    var name: String
+    var geometry: BankGemetry
+}
+
+class BankGemetry: Codable {
+    var location: BankLocation
+}
+
+class BankLocation: Codable {
+    var latitude: Double
+    var longitude: Double
+    
+    enum CodingKeys: String, CodingKey {
+       case latitude = "lat"
+       case longitude = "lng"
+    }
+}
+
+

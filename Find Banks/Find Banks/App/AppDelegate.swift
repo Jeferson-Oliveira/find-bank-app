@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupGoogleMaps() {
-        GMSServices.provideAPIKey("AIzaSyCOW90gKt4tWa1qj66Qx7yN-h-YyWeGPX0")
+        GMSServices.provideAPIKey(APPConfig.gmsServicesKey)
     }
     
     // MARK: UISceneSession Lifecycle
