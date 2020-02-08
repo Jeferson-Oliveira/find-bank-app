@@ -11,5 +11,5 @@ import Foundation
 struct APPConfig {
     static let gmsServicesKey = "AIzaSyCOW90gKt4tWa1qj66Qx7yN-h-YyWeGPX0"
     static let bankName = "Itaú"
-    static let radius = 2000
+    static let radius = Double(2000)
 }
