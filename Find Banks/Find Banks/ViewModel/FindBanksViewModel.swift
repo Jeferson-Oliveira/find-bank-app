@@ -31,16 +31,22 @@ class FindBanksViewModel: FindBanksViewModelProtocol, FindBanksViewModelInput {
     var inputs: FindBanksViewModelInput { self }
     var outputs: FindBanksViewModelOutput { self }
     
+    let disposedBag = DisposeBag()
     let findBanksAction = PublishSubject<CLLocation>()
     
     private let findBanksResult: Observable<Result<BanksPage>>
+    private var lastLocation = BehaviorRelay<CLLocation>(value: .init(latitude: .zero, longitude: .zero))
     private let service: BankServiceProtocol
     
     init(service: BankServiceProtocol = BankService()) {
         self.service = service
-        findBanksResult = findBanksAction.flatMapLatest { latestLocation in
-            return service.findNeablyBanks(latestLocation)
+        findBanksResult = Observable.combineLatest(findBanksAction, lastLocation).filter { currentLocation, lastLocation in
+            currentLocation.distance(from: lastLocation) > APPConfig.radius
+        }.flatMapLatest { currentLocation, _ in
+            return service.findNeablyBanks(currentLocation)
         }.share()
+        
+        findBanksResult.map { $0.value }.unwrap().withLatestFrom(findBanksAction).bind(to: lastLocation).disposed(by: disposedBag)
     }
 }
 

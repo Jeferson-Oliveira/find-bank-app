@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GoogleMaps
 
 class BanksPage: Codable {
     let results: [Bank]
@@ -15,6 +16,7 @@ class BanksPage: Codable {
 class Bank: Codable {
     var id: String
     var name: String
+    var vicinity: String
     var geometry: BankGemetry
 }
 
@@ -29,6 +31,10 @@ class BankLocation: Codable {
     enum CodingKeys: String, CodingKey {
        case latitude = "lat"
        case longitude = "lng"
+    }
+    
+    func toCLLocation() -> CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
 }
 

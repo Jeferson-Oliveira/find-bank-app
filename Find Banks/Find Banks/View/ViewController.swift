@@ -15,6 +15,7 @@ import RxSwift
 class ViewController: UIViewController {
 
     @IBOutlet weak var mapView: GMSMapView!
+    
     private var markers = [GMSMarker]()
     private let locationManager = CLLocationManager()
 
@@ -23,15 +24,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLocationManager()
+        requestUserLocation()
         setupMapView()
         setupInputs()
         setupOutputs()
     }
     
-    private func setupLocationManager() {
-        locationManager.delegate = self
+    private func requestUserLocation() {
         locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
     }
 
     private func setupMapView() {
@@ -39,21 +41,35 @@ class ViewController: UIViewController {
         mapView.settings.myLocationButton = true
     }
     
-    private func addMarker(position: CLLocationCoordinate2D) {
-        let marker = GMSMarker(position: position)
+    private func addMarker(to bank: Bank) {
+
+        let marker = GMSMarker(position: bank.geometry.location.toCLLocation().coordinate)
         marker.appearAnimation = .pop
+        marker.title = bank.name
+        marker.snippet = bank.vicinity
         marker.isFlat = true
         marker.icon = #imageLiteral(resourceName: "ic_itau")
         marker.map = self.mapView
+        
         markers.append(marker)
     }
     
     private func removeAllMarkers() {
         markers.forEach { $0.map = nil }
+        markers.removeAll()
     }
     
     private func changeCamera(toLocation: CLLocationCoordinate2D) {
         mapView.camera = GMSCameraPosition.camera(withTarget: toLocation, zoom: 15)
+    }
+    
+    private func showNoAutoziredLocationAlert() {
+        let alert = UIAlertController(title: "Warning".localized(withComment: .empty),
+                                      message: "UserLocationAutorizeDeniedMessage".localized(withComment: .empty),
+                                      preferredStyle: .alert)
+        alert.addAction(.init(title: "TryAgain".localized(withComment: .empty),
+                              style: .destructive))
+        present(alert, animated: true)
     }
     
     private func setupInputs() {
@@ -65,13 +81,17 @@ class ViewController: UIViewController {
         }).disposed(by: disposedBag)
     }
     
+    private func locationDidUpdate(to location: CLLocation) {
+        self.changeCamera(toLocation: location.coordinate)
+        self.viewModel.inputs.findBanksAction.onNext(location)
+        self.locationManager.stopUpdatingLocation()
+    }
+    
     private func setupOutputs() {
         viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
-            self?.removeAllMarkers()
-            banks.forEach { bank in
-                self?.addMarker(position: .init(latitude: bank.geometry.location.latitude,
-                                                longitude: bank.geometry.location.longitude))
-            }
+            guard let this = self else {return}
+            this.removeAllMarkers()
+            banks.forEach(this.addMarker(to:))
         }).disposed(by: disposedBag)
     }
 
@@ -79,21 +99,20 @@ class ViewController: UIViewController {
 
 
 extension ViewController: CLLocationManagerDelegate {
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse  {
-            locationManager.startUpdatingLocation()
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
             mapView.isMyLocationEnabled = true
             mapView.settings.myLocationButton = true
+        default:
+            showNoAutoziredLocationAlert()
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.first else {return}
-        changeCamera(toLocation: currentLocation.coordinate)
-        viewModel.inputs.findBanksAction.onNext(currentLocation)
-        locationManager.stopUpdatingLocation()
+        locationDidUpdate(to: currentLocation)
     }
 
 }
-
