@@ -210,9 +210,9 @@
 		41A9886D23EE5561005FB93B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				41A9886523EE52CA005FB93B /* BaseService.swift */,
 				41A9886723EE534F005FB93B /* Result.swift */,
 				41C0AFE223EE5ABD00308EB6 /* Endpoints.swift */,
-				41A9886523EE52CA005FB93B /* BaseService.swift */,
 				41A9886B23EE555D005FB93B /* BankService.swift */,
 				41C0B00123EF371900308EB6 /* UserLocationService.swift */,
 			);

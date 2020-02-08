@@ -23,6 +23,7 @@ class UserLocationService: BaseService, UserLocationServiceProtocol {
     func requestUserLocation() -> Observable<Result<CLLocation>> {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.distanceFilter = 100
         return locationManager.rx.location.unwrap().map { Result.success($0)}
     }
     
