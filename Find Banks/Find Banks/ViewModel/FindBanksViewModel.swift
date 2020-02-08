@@ -46,7 +46,12 @@ class FindBanksViewModel: FindBanksViewModelProtocol, FindBanksViewModelInput {
             return service.findNeablyBanks(currentLocation)
         }.share()
         
-        findBanksResult.map { $0.value }.unwrap().withLatestFrom(findBanksAction).bind(to: lastLocation).disposed(by: disposedBag)
+        findBanksResult
+            .map { $0.value }
+            .unwrap()
+            .withLatestFrom(findBanksAction)
+            .bind(to: lastLocation)
+            .disposed(by: disposedBag)
     }
 }
 
@@ -56,7 +61,7 @@ extension FindBanksViewModel: FindBanksViewModelOutput {
     }
     
     var feedback: Driver<String> {
-        findBanksResult.map { $0.failure?.localizedDescription }.unwrap().asDriver(onErrorJustReturn: "")
+        findBanksResult.map { $0.failure?.localizedDescription }.unwrap().asDriver(onErrorJustReturn: .empty)
     }
 }
 

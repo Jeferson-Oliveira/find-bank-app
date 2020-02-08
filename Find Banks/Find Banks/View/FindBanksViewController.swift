@@ -12,7 +12,7 @@ import RxGoogleMaps
 import CoreLocation
 import RxSwift
 
-class ViewController: UIViewController {
+class FindBanksViewController: BaseViewController {
 
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -41,8 +41,24 @@ class ViewController: UIViewController {
         mapView.settings.myLocationButton = true
     }
     
+    private func setupInputs() {
+           mapView.rx.idleAt.subscribe(onNext: { [weak self] cameraPosition in
+               self?.viewModel
+                       .inputs
+                       .findBanksAction.onNext(.init(latitude: cameraPosition.target.latitude,
+                                                     longitude: cameraPosition.target.longitude))
+           }).disposed(by: disposedBag)
+       }
+       
+       private func setupOutputs() {
+           viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
+               guard let this = self else {return}
+               this.removeAllMarkers()
+               banks.forEach(this.addMarker(to:))
+           }).disposed(by: disposedBag)
+       }
+    
     private func addMarker(to bank: Bank) {
-
         let marker = GMSMarker(position: bank.geometry.location.toCLLocation().coordinate)
         marker.appearAnimation = .pop
         marker.title = bank.name
@@ -50,7 +66,6 @@ class ViewController: UIViewController {
         marker.isFlat = true
         marker.icon = #imageLiteral(resourceName: "ic_itau")
         marker.map = self.mapView
-        
         markers.append(marker)
     }
     
@@ -63,42 +78,18 @@ class ViewController: UIViewController {
         mapView.camera = GMSCameraPosition.camera(withTarget: toLocation, zoom: 15)
     }
     
-    private func showNoAutoziredLocationAlert() {
-        let alert = UIAlertController(title: "Warning".localized(withComment: .empty),
-                                      message: "UserLocationAutorizeDeniedMessage".localized(withComment: .empty),
-                                      preferredStyle: .alert)
-        alert.addAction(.init(title: "TryAgain".localized(withComment: .empty),
-                              style: .destructive))
-        present(alert, animated: true)
-    }
-    
-    private func setupInputs() {
-        mapView.rx.idleAt.subscribe(onNext: { [weak self] cameraPosition in
-            self?.viewModel
-                    .inputs
-                    .findBanksAction.onNext(.init(latitude: cameraPosition.target.latitude,
-                                              longitude: cameraPosition.target.longitude))
-        }).disposed(by: disposedBag)
-    }
-    
     private func locationDidUpdate(to location: CLLocation) {
         self.changeCamera(toLocation: location.coordinate)
         self.viewModel.inputs.findBanksAction.onNext(location)
         self.locationManager.stopUpdatingLocation()
     }
     
-    private func setupOutputs() {
-        viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
-            guard let this = self else {return}
-            this.removeAllMarkers()
-            banks.forEach(this.addMarker(to:))
-        }).disposed(by: disposedBag)
-    }
+    
 
 }
 
 
-extension ViewController: CLLocationManagerDelegate {
+extension FindBanksViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -106,7 +97,7 @@ extension ViewController: CLLocationManagerDelegate {
             mapView.isMyLocationEnabled = true
             mapView.settings.myLocationButton = true
         default:
-            showNoAutoziredLocationAlert()
+            showSimpleAlert(message: "UserLocationAutorizeDeniedMessage".localized(withComment: .empty))
         }
     }
 
