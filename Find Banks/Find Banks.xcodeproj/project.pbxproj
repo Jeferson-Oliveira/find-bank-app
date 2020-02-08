@@ -27,6 +27,7 @@
 		41C0AFF623EF24A600308EB6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0AFF523EF24A600308EB6 /* String.swift */; };
 		41C0AFF823EF31BB00308EB6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0AFF723EF31BB00308EB6 /* BaseViewController.swift */; };
 		41C0AFFD23EF353E00308EB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41C0AFFF23EF353E00308EB6 /* Localizable.strings */; };
+		41C0B00223EF371900308EB6 /* UserLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00123EF371900308EB6 /* UserLocationService.swift */; };
 		63272E79E4B7A6A302319BC2 /* Pods_Find_Banks_Find_BanksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C509B3D853782410BC7507 /* Pods_Find_Banks_Find_BanksUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		41C0AFFC23EF353600308EB6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		41C0AFFE23EF353E00308EB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41C0B00023EF354500308EB6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		41C0B00123EF371900308EB6 /* UserLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationService.swift; sourceTree = "<group>"; };
 		4957C623356D60681EE82F61 /* Pods-Find Banks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks/Pods-Find Banks.debug.xcconfig"; sourceTree = "<group>"; };
 		53C3EEEF7D62474FA6B19127 /* Pods-Find Banks-Find BanksUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks-Find BanksUITests.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks-Find BanksUITests/Pods-Find Banks-Find BanksUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FA501E46C38BC0CB21134C6 /* Pods_Find_BanksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_BanksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +214,7 @@
 				41C0AFE223EE5ABD00308EB6 /* Endpoints.swift */,
 				41A9886523EE52CA005FB93B /* BaseService.swift */,
 				41A9886B23EE555D005FB93B /* BankService.swift */,
+				41C0B00123EF371900308EB6 /* UserLocationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				4117E63023EE356600C87CCA /* FindBanksViewController.swift in Sources */,
 				41C0AFF623EF24A600308EB6 /* String.swift in Sources */,
 				41A9886A23EE53AE005FB93B /* Bank.swift in Sources */,
+				41C0B00223EF371900308EB6 /* UserLocationService.swift in Sources */,
 				41C0AFE523EE5C9200308EB6 /* AppConfig.swift in Sources */,
 				4117E62C23EE356600C87CCA /* AppDelegate.swift in Sources */,
 				41C0AFF823EF31BB00308EB6 /* BaseViewController.swift in Sources */,

@@ -17,46 +17,55 @@ class FindBanksViewController: BaseViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     private var markers = [GMSMarker]()
-    private let locationManager = CLLocationManager()
 
     let disposedBag = DisposeBag()
     let viewModel: FindBanksViewModelProtocol = FindBanksViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestUserLocation()
         setupMapView()
         setupInputs()
         setupOutputs()
+        viewModel.inputs.didLoadAction.on(.next(()))
     }
     
-    private func requestUserLocation() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-    }
-
     private func setupMapView() {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
     }
     
     private func setupInputs() {
-           mapView.rx.idleAt.subscribe(onNext: { [weak self] cameraPosition in
-               self?.viewModel
-                       .inputs
-                       .findBanksAction.onNext(.init(latitude: cameraPosition.target.latitude,
-                                                     longitude: cameraPosition.target.longitude))
-           }).disposed(by: disposedBag)
-       }
+       mapView.rx.idleAt.subscribe(onNext: { [weak self] cameraPosition in
+           self?.viewModel
+                   .inputs
+                   .findBanksAction.onNext(.init(latitude: cameraPosition.target.latitude,
+                                                 longitude: cameraPosition.target.longitude))
+       }).disposed(by: disposedBag)
+    }
        
-       private func setupOutputs() {
-           viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
-               guard let this = self else {return}
-               this.removeAllMarkers()
-               banks.forEach(this.addMarker(to:))
-           }).disposed(by: disposedBag)
-       }
+    private func setupOutputs() {
+        viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
+           guard let this = self else {return}
+           this.removeAllMarkers()
+           banks.forEach(this.addMarker(to:))
+        }).disposed(by: disposedBag)
+    
+        viewModel.outputs.currentUserLocation.drive(onNext: { [weak self] userLocation in
+            guard let this = self else {return}
+            this.locationDidUpdate(to: userLocation)
+        }).disposed(by: disposedBag)
+        
+        viewModel.outputs.userLocationPermissionStatus.drive(onNext: { [weak self] status in
+            guard let this = self else {return}
+            switch status {
+            case .authorizedAlways, .authorizedWhenInUse:
+                this.mapView.isMyLocationEnabled = true
+                this.mapView.settings.myLocationButton = true
+            default:
+                this.showSimpleAlert(message: "UserLocationAutorizeDeniedMessage".localized(withComment: .empty))
+            }
+        }).disposed(by: disposedBag)
+    }
     
     private func addMarker(to bank: Bank) {
         let marker = GMSMarker(position: bank.geometry.location.toCLLocation().coordinate)
@@ -81,29 +90,6 @@ class FindBanksViewController: BaseViewController {
     private func locationDidUpdate(to location: CLLocation) {
         self.changeCamera(toLocation: location.coordinate)
         self.viewModel.inputs.findBanksAction.onNext(location)
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    
-
-}
-
-
-extension FindBanksViewController: CLLocationManagerDelegate {
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            mapView.isMyLocationEnabled = true
-            mapView.settings.myLocationButton = true
-        default:
-            showSimpleAlert(message: "UserLocationAutorizeDeniedMessage".localized(withComment: .empty))
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let currentLocation = locations.first else {return}
-        locationDidUpdate(to: currentLocation)
     }
 
 }

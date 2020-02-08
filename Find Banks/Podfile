@@ -14,7 +14,8 @@ target 'Find Banks' do
   
   #RxUtility
   pod 'RxSwiftExt', '~> 5.2.0'
-  pod 'RxGoogleMaps'
+  pod 'RxGoogleMaps', '~> 4.0.0'
+  pod 'RxCoreLocation', '~> 1.4'
 
   target 'Find BanksTests' do
     inherit! :search_paths

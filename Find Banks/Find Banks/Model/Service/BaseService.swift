@@ -14,10 +14,6 @@ class BaseService {
     
     private let sessionManager = Alamofire.SessionManager.default
     
-    init() {
-        
-    }
-    
     func request<T: Codable>(url: URLConvertible,
                              method: HTTPMethod,
                              parameters: Parameters = [:],
