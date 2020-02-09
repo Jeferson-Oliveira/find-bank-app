@@ -19,7 +19,7 @@ class FindBanksServiceMock: BankServiceProtocol {
         self.resultType = resultType
     }
     
-    func findNeablyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>> {
+    func findNearbyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>> {
         switch resultType {
         case .success:
             return Observable.just(Result.success(BankMock.bankPageMock))

@@ -31,7 +31,7 @@ class BankServiceTest: QuickSpec {
                                 
                 it("The result can not be nil") {
                     self.stub(everything, json(BankMock.bankPageMock.dictionary as Any))
-                    let result = service.findNeablyBanks(mockUserLocation)
+                    let result = service.findNearbyBanks(mockUserLocation)
                     do {
                         let page = try result.toBlocking().first()?.value
                         expect(page).notTo(beNil())
@@ -42,7 +42,7 @@ class BankServiceTest: QuickSpec {
                 
                 it("when user request and an error occurs") {
                     self.stub(everything, failure(BankMock.mockError))
-                    let result = service.findNeablyBanks(mockUserLocation)
+                    let result = service.findNearbyBanks(mockUserLocation)
                     do {
                         let page = try result.toBlocking().first()?.value
                         let error = try result.toBlocking().first()?.failure
@@ -55,7 +55,7 @@ class BankServiceTest: QuickSpec {
                 
                 it("when return data can not be deserialized") {
                     self.stub(everything, json(["invalidKey":"invalidValue"]))
-                    let result = service.findNeablyBanks(mockUserLocation)
+                    let result = service.findNearbyBanks(mockUserLocation)
                     do {
                         let page = try result.toBlocking().first()?.value
                         let error = try result.toBlocking().first()?.failure
