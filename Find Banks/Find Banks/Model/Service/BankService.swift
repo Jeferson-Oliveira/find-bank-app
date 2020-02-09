@@ -11,11 +11,11 @@ import CoreLocation
 import RxSwift
 
 protocol BankServiceProtocol {
-    func findNeablyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>>
+    func findNearbyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>>
 }
 
 class BankService: BaseService, BankServiceProtocol {
-    func findNeablyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>> {
+    func findNearbyBanks(_ from: CLLocation) -> Observable<Result<BanksPage>> {
         
         var parameters = Parameters()
         parameters["radius"] = APPConfig.radius
@@ -24,7 +24,7 @@ class BankService: BaseService, BankServiceProtocol {
         parameters["key"] =  APPConfig.gmsServicesKey
         parameters["location"] = "\(from.coordinate.latitude),\(from.coordinate.longitude)"
         
-        return request(url: Endpoints.Bank.findNeablyBanks.rawValue,
+        return request(url: Endpoints.Bank.findNearbyBanks.rawValue,
                        method: .get,
                        parameters: parameters,
                        encoding: URLEncoding.queryString)

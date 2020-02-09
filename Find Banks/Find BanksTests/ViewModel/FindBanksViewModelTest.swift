@@ -36,9 +36,9 @@ class FindBanksViewModelTest: QuickSpec {
                     
                     viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .success))
                     let page = scheduler.createObserver([Bank].self)
-                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), json(BankMock.bankPageMock.dictionary as Any))
+                    self.stub(http(.get, uri: Endpoints.Bank.findNearbyBanks.rawValue), json(BankMock.bankPageMock.dictionary as Any))
                     
-                    viewModel.outputs.neablyBanks.drive(page).disposed(by: disposeBag)
+                    viewModel.outputs.nearbyBanks.drive(page).disposed(by: disposeBag)
                     
                     scheduler.createColdObservable([.next(10, mockUserLocation)])
                         .bind(to: viewModel.inputs.findBanksAction).disposed(by: disposeBag)
@@ -55,7 +55,7 @@ class FindBanksViewModelTest: QuickSpec {
                     
                     viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .failure))
                     let feedback = scheduler.createObserver(String.self)
-                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), failure(BankMock.mockError))
+                    self.stub(http(.get, uri: Endpoints.Bank.findNearbyBanks.rawValue), failure(BankMock.mockError))
                     
                     viewModel.outputs.feedback.drive(feedback).disposed(by: disposeBag)
                     
@@ -71,7 +71,7 @@ class FindBanksViewModelTest: QuickSpec {
                     
                     viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .failure))
                     let feedback = scheduler.createObserver(String.self)
-                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), json(["invalidKey  ":"invalidValue"]))
+                    self.stub(http(.get, uri: Endpoints.Bank.findNearbyBanks.rawValue), json(["invalidKey  ":"invalidValue"]))
                     
                     viewModel.outputs.feedback.drive(feedback).disposed(by: disposeBag)
                     

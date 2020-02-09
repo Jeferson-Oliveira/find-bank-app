@@ -17,10 +17,10 @@ class Bank: Codable {
     var id: String = .empty
     var name: String = .empty
     var vicinity: String = .empty
-    var geometry: BankGemetry = BankGemetry()
+    var geometry: BankGeometry = BankGeometry()
 }
 
-class BankGemetry: Codable {
+class BankGeometry: Codable {
     var location: BankLocation = BankLocation()
 }
 
