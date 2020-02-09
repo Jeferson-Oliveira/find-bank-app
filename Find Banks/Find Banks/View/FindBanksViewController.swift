@@ -44,7 +44,7 @@ class FindBanksViewController: BaseViewController {
     }
        
     private func setupOutputs() {
-        viewModel.outputs.neablyBanks.drive(onNext: { [weak self] banks in
+        viewModel.outputs.nearbyBanks.drive(onNext: { [weak self] banks in
            guard let this = self else {return}
            this.removeAllMarkers()
            banks.forEach(this.addMarker(to:))

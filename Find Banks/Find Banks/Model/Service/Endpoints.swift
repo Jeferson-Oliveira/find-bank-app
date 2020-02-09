@@ -10,6 +10,6 @@ import Foundation
 
 enum Endpoints {
     enum Bank: String {
-        case findNeablyBanks = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+        case findNearbyBanks = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     }
 }

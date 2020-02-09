@@ -23,7 +23,7 @@ protocol FindBanksViewModelInput {
 }
 
 protocol FindBanksViewModelOutput {
-    var neablyBanks: Driver<[Bank]> { get }
+    var nearbyBanks: Driver<[Bank]> { get }
     var userLocationPermissionStatus: Driver<CLAuthorizationStatus> { get }
     var currentUserLocation: Driver<CLLocation> { get }
     var feedback: Driver<String> { get }
@@ -52,7 +52,7 @@ class FindBanksViewModel: FindBanksViewModelProtocol, FindBanksViewModelInput {
         findBanksResult = Observable.combineLatest(findBanksAction, lastLocation).filter { currentLocation, lastLocation in
             currentLocation.distance(from: lastLocation) > APPConfig.radius
         }.flatMapLatest { currentLocation, _ in
-            return bankService.findNeablyBanks(currentLocation)
+            return bankService.findNearbyBanks(currentLocation)
         }.share()
         
         getUserLocationResult = didLoadAction.flatMapLatest {
@@ -83,7 +83,7 @@ extension FindBanksViewModel: FindBanksViewModelOutput {
         getUserLocationResult.map { $0.value }.unwrap().asDriver(onErrorJustReturn: .init(latitude: .zero, longitude: .zero))
     }
     
-    var neablyBanks: Driver<[Bank]> {
+    var nearbyBanks: Driver<[Bank]> {
         findBanksResult.map { $0.value }.unwrap().map { $0.results }.asDriver(onErrorJustReturn: [])
     }
     

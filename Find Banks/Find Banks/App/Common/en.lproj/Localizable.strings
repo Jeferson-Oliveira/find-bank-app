@@ -9,4 +9,4 @@
 
 Warning = "Warning";
 Ok = "Ok";
-UserLocationAutorizeDeniedMessage = "We need to your location permission to list the neably bank agencies";
+UserLocationAutorizeDeniedMessage = "We need to your location permission to list the nearby bank agencies";
