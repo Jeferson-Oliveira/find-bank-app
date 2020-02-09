@@ -6,15 +6,12 @@
 //  Copyright © 2020 Jeferson. All rights reserved.
 //
 
-import Foundation
 import Quick
 import Nimble
 import RxTest
 import RxSwift
-import RxCocoa
 import Mockingjay
 import CoreLocation
-import RxBlocking
 
 @testable import Find_Banks
 

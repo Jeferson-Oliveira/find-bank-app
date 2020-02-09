@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 @testable import Find_Banks
 
 class BankMock {
