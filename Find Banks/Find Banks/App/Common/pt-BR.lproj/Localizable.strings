@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Find Banks
+
+  Created by Jeferson Oliveira Cequeira de Jesus on 08/02/20.
+  Copyright © 2020 Jeferson. All rights reserved.
+*/
+
+
+Warning = "Aviso";
+Ok = "Certo";
+UserLocationAutorizeDeniedMessage = "Precisamos de sua localização para listar as agências mais próximas";
+
