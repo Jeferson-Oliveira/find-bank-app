@@ -28,6 +28,13 @@
 		41C0AFF823EF31BB00308EB6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0AFF723EF31BB00308EB6 /* BaseViewController.swift */; };
 		41C0AFFD23EF353E00308EB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41C0AFFF23EF353E00308EB6 /* Localizable.strings */; };
 		41C0B00223EF371900308EB6 /* UserLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00123EF371900308EB6 /* UserLocationService.swift */; };
+		41C0B00623EF61C800308EB6 /* FindBanksViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00523EF61C800308EB6 /* FindBanksViewModelTest.swift */; };
+		41C0B00923EF920500308EB6 /* FindBanksServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00823EF920500308EB6 /* FindBanksServiceMock.swift */; };
+		41C0B00B23EF936D00308EB6 /* ResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00A23EF936D00308EB6 /* ResultType.swift */; };
+		41C0B00F23EFA2CA00308EB6 /* BankLocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B00E23EFA2CA00308EB6 /* BankLocationTest.swift */; };
+		41C0B01123EFA67F00308EB6 /* BankServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B01023EFA67F00308EB6 /* BankServiceTest.swift */; };
+		41C0B01323EFA89A00308EB6 /* BankMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B01223EFA89A00308EB6 /* BankMock.swift */; };
+		41C0B01523EFAB3700308EB6 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C0B01423EFAB3700308EB6 /* Encodable.swift */; };
 		63272E79E4B7A6A302319BC2 /* Pods_Find_Banks_Find_BanksUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C509B3D853782410BC7507 /* Pods_Find_Banks_Find_BanksUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +84,13 @@
 		41C0AFFE23EF353E00308EB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41C0B00023EF354500308EB6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		41C0B00123EF371900308EB6 /* UserLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationService.swift; sourceTree = "<group>"; };
+		41C0B00523EF61C800308EB6 /* FindBanksViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBanksViewModelTest.swift; sourceTree = "<group>"; };
+		41C0B00823EF920500308EB6 /* FindBanksServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindBanksServiceMock.swift; sourceTree = "<group>"; };
+		41C0B00A23EF936D00308EB6 /* ResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultType.swift; sourceTree = "<group>"; };
+		41C0B00E23EFA2CA00308EB6 /* BankLocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankLocationTest.swift; sourceTree = "<group>"; };
+		41C0B01023EFA67F00308EB6 /* BankServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankServiceTest.swift; sourceTree = "<group>"; };
+		41C0B01223EFA89A00308EB6 /* BankMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankMock.swift; sourceTree = "<group>"; };
+		41C0B01423EFAB3700308EB6 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		4957C623356D60681EE82F61 /* Pods-Find Banks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks/Pods-Find Banks.debug.xcconfig"; sourceTree = "<group>"; };
 		53C3EEEF7D62474FA6B19127 /* Pods-Find Banks-Find BanksUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find Banks-Find BanksUITests.debug.xcconfig"; path = "Target Support Files/Pods-Find Banks-Find BanksUITests/Pods-Find Banks-Find BanksUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FA501E46C38BC0CB21134C6 /* Pods_Find_BanksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_BanksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +166,9 @@
 		4117E64123EE356B00C87CCA /* Find BanksTests */ = {
 			isa = PBXGroup;
 			children = (
+				41C0B00C23EFA2A300308EB6 /* Model */,
+				41C0B00323EF619A00308EB6 /* ViewModel */,
+				41C0B00723EF91F200308EB6 /* Mock */,
 				4117E64223EE356B00C87CCA /* Find_BanksTests.swift */,
 				4117E64423EE356B00C87CCA /* Info.plist */,
 			);
@@ -233,8 +250,52 @@
 			isa = PBXGroup;
 			children = (
 				41C0AFF523EF24A600308EB6 /* String.swift */,
+				41C0B01423EFAB3700308EB6 /* Encodable.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		41C0B00323EF619A00308EB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				41C0B00523EF61C800308EB6 /* FindBanksViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		41C0B00423EF61A400308EB6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				41C0B01023EFA67F00308EB6 /* BankServiceTest.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		41C0B00723EF91F200308EB6 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				41C0B00823EF920500308EB6 /* FindBanksServiceMock.swift */,
+				41C0B00A23EF936D00308EB6 /* ResultType.swift */,
+				41C0B01223EFA89A00308EB6 /* BankMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		41C0B00C23EFA2A300308EB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41C0B00D23EFA2AC00308EB6 /* Entity */,
+				41C0B00423EF61A400308EB6 /* Service */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		41C0B00D23EFA2AC00308EB6 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				41C0B00E23EFA2CA00308EB6 /* BankLocationTest.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		8823D721F8C41129FA829F5A /* Frameworks */ = {
@@ -556,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4117E63023EE356600C87CCA /* FindBanksViewController.swift in Sources */,
+				41C0B01523EFAB3700308EB6 /* Encodable.swift in Sources */,
 				41C0AFF623EF24A600308EB6 /* String.swift in Sources */,
 				41A9886A23EE53AE005FB93B /* Bank.swift in Sources */,
 				41C0B00223EF371900308EB6 /* UserLocationService.swift in Sources */,
@@ -575,7 +637,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C0B00B23EF936D00308EB6 /* ResultType.swift in Sources */,
 				4117E64323EE356B00C87CCA /* Find_BanksTests.swift in Sources */,
+				41C0B00923EF920500308EB6 /* FindBanksServiceMock.swift in Sources */,
+				41C0B01123EFA67F00308EB6 /* BankServiceTest.swift in Sources */,
+				41C0B00623EF61C800308EB6 /* FindBanksViewModelTest.swift in Sources */,
+				41C0B00F23EFA2CA00308EB6 /* BankLocationTest.swift in Sources */,
+				41C0B01323EFA89A00308EB6 /* BankMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

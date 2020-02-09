@@ -10,23 +10,23 @@ import Foundation
 import GoogleMaps
 
 class BanksPage: Codable {
-    let results: [Bank]
+    var results: [Bank] = []
 }
 
 class Bank: Codable {
-    var id: String
-    var name: String
-    var vicinity: String
-    var geometry: BankGemetry
+    var id: String = .empty
+    var name: String = .empty
+    var vicinity: String = .empty
+    var geometry: BankGemetry = BankGemetry()
 }
 
 class BankGemetry: Codable {
-    var location: BankLocation
+    var location: BankLocation = BankLocation()
 }
 
 class BankLocation: Codable {
-    var latitude: Double
-    var longitude: Double
+    var latitude: Double = .zero
+    var longitude: Double = .zero
     
     enum CodingKeys: String, CodingKey {
        case latitude = "lat"
