@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import Quick
 import Nimble
 import RxTest
@@ -23,54 +22,69 @@ class FindBanksViewModelTest: QuickSpec {
     
     override func spec() {
         
-        describe("Find banks ViewModel") {
+        let mockUserLocation = CLLocation(latitude: -12.9746, longitude: -38.4674)
+        var scheduler: TestScheduler!
+        var disposeBag: DisposeBag!
+        var viewModel: FindBanksViewModelProtocol!
+        
+        describe("Find Banks ViewModel") {
             
-            let mockUserLocation = CLLocation(latitude: -12.9746, longitude: -38.4674)
-            
-            var scheduler: TestScheduler!
-            var disposeBag: DisposeBag!
-            var viewModel: FindBanksViewModel!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-                scheduler = TestScheduler(initialClock: .zero)
-            }
-            
-            context("when user request to agency with location") {
+            context("Load Banks With User Location") {
+                beforeEach {
+                    scheduler = TestScheduler(initialClock: .zero)
+                    disposeBag = DisposeBag()
+                }
+                
+                it("When request is made with succesfull the banks list shoud be returned") {
                     
-                var banksObserver: TestableObserver<[Bank]>!
-                
-                beforeEach {
                     viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .success))
-                    banksObserver = scheduler.createObserver([Bank].self)
-                    scheduler.createHotObservable([.next(10, mockUserLocation)]).bind(to: viewModel.inputs.findBanksAction).disposed(by: disposeBag)
-                    viewModel.outputs.neablyBanks.drive(banksObserver).disposed(by: disposeBag)
+                    let page = scheduler.createObserver([Bank].self)
+                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), json(BankMock.bankPageMock.dictionary as Any))
+                    
+                    viewModel.outputs.neablyBanks.drive(page).disposed(by: disposeBag)
+                    
+                    scheduler.createColdObservable([.next(10, mockUserLocation)])
+                        .bind(to: viewModel.inputs.findBanksAction).disposed(by: disposeBag)
+                    
                     scheduler.start()
-                }
-
-                it("When data load") {
-                    expect(banksObserver.events).toNot(beEmpty())
+                    
+                    expect(page.events).to(containElementSatisfying({ element -> Bool in
+                        print(element.debugDescription)
+                        return (element.value.element?.contains(where: { $0.id == BankMock.bankMock.id }) ?? false) && element.time == 10
+                    }))
                 }
                 
-            }
-            
-            context("when user request and an error occurs") {
-                var feedbackObserver: TestableObserver<String>!
-                beforeEach {
+                it("When request returns an error message shoud be send to feedback") {
+                    
                     viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .failure))
-                    feedbackObserver = scheduler.createObserver(String.self)
-                    scheduler
-                        .createHotObservable([.next(10, mockUserLocation)])
-                        .bind(to: viewModel.inputs.findBanksAction)
-                        .disposed(by: disposeBag)
-
-                    viewModel.outputs.feedback.drive(feedbackObserver).disposed(by: disposeBag)
+                    let feedback = scheduler.createObserver(String.self)
+                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), failure(BankMock.mockError))
+                    
+                    viewModel.outputs.feedback.drive(feedback).disposed(by: disposeBag)
+                    
+                    scheduler.createColdObservable([.next(10, mockUserLocation)])
+                        .bind(to: viewModel.inputs.findBanksAction).disposed(by: disposeBag)
+                    
                     scheduler.start()
-                }
-                it("When data load") {
-                    expect(feedbackObserver.events).toNot(equal([.next(10, .empty)]))
+                    
+                    expect(feedback.events).toNot(equal([.next(10, .empty)]))
                 }
                 
+                it("When request can not make an deserialization of the response an error message shoud be send to feedback") {
+                    
+                    viewModel = FindBanksViewModel(bankService: FindBanksServiceMock(resultType: .failure))
+                    let feedback = scheduler.createObserver(String.self)
+                    self.stub(http(.get, uri: Endpoints.Bank.findNeablyBanks.rawValue), json(["invalidKey  ":"invalidValue"]))
+                    
+                    viewModel.outputs.feedback.drive(feedback).disposed(by: disposeBag)
+                    
+                    scheduler.createColdObservable([.next(10, mockUserLocation)])
+                        .bind(to: viewModel.inputs.findBanksAction).disposed(by: disposeBag)
+                    
+                    scheduler.start()
+                    
+                    expect(feedback.events).toNot(equal([.next(10, .empty)]))
+                }
             }
         }
     }

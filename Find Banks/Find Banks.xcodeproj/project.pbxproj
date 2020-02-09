@@ -15,7 +15,6 @@
 		4117E63323EE356600C87CCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4117E63123EE356600C87CCA /* Main.storyboard */; };
 		4117E63523EE356B00C87CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4117E63423EE356B00C87CCA /* Assets.xcassets */; };
 		4117E63823EE356B00C87CCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4117E63623EE356B00C87CCA /* LaunchScreen.storyboard */; };
-		4117E64323EE356B00C87CCA /* Find_BanksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4117E64223EE356B00C87CCA /* Find_BanksTests.swift */; };
 		4117E64E23EE356B00C87CCA /* Find_BanksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4117E64D23EE356B00C87CCA /* Find_BanksUITests.swift */; };
 		41A9886223EE4D2A005FB93B /* FindBanksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9886123EE4D2A005FB93B /* FindBanksViewModel.swift */; };
 		41A9886623EE52CA005FB93B /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9886523EE52CA005FB93B /* BaseService.swift */; };
@@ -65,7 +64,6 @@
 		4117E63723EE356B00C87CCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4117E63923EE356B00C87CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4117E63E23EE356B00C87CCA /* Find BanksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Find BanksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4117E64223EE356B00C87CCA /* Find_BanksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find_BanksTests.swift; sourceTree = "<group>"; };
 		4117E64423EE356B00C87CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4117E64923EE356B00C87CCA /* Find BanksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Find BanksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4117E64D23EE356B00C87CCA /* Find_BanksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find_BanksUITests.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 				41C0B00C23EFA2A300308EB6 /* Model */,
 				41C0B00323EF619A00308EB6 /* ViewModel */,
 				41C0B00723EF91F200308EB6 /* Mock */,
-				4117E64223EE356B00C87CCA /* Find_BanksTests.swift */,
 				4117E64423EE356B00C87CCA /* Info.plist */,
 			);
 			path = "Find BanksTests";
@@ -638,7 +635,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41C0B00B23EF936D00308EB6 /* ResultType.swift in Sources */,
-				4117E64323EE356B00C87CCA /* Find_BanksTests.swift in Sources */,
 				41C0B00923EF920500308EB6 /* FindBanksServiceMock.swift in Sources */,
 				41C0B01123EFA67F00308EB6 /* BankServiceTest.swift in Sources */,
 				41C0B00623EF61C800308EB6 /* FindBanksViewModelTest.swift in Sources */,
